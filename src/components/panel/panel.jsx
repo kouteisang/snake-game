@@ -88,65 +88,45 @@ export default class Panel extends Component {
         }
     }
 
-    changeSnakePosition = () => {
-        const {direction} = this.state
+
+    changePositionByDirection = (direction)=>{
+        const snakePositions = this.state.snakePositions
+        const snakeHead = snakePositions[snakePositions.length-1]
+        const beforeTop = parseInt(snakeHead.top)
+        const beforeLeft = parseInt(snakeHead.left)
+        //删掉第一个元素并返回该元素的数值。此方法用来更改数组的长度
+        snakePositions.shift()
+        let newTop = beforeTop
+        let newLeft = beforeLeft
+        let newSnakePositions = []
         switch(direction){
             case "ArrowUp":
-                const snakePositions1 = this.state.snakePositions
-                const snakeHead1 = snakePositions1[snakePositions1.length-1]
-                const beforeTop1 = parseInt(snakeHead1.top)
-                const beforeLeft1 = parseInt(snakeHead1.left)
-                snakePositions1.shift()
-                const newTop1 = beforeTop1 - 10 + "px"
-                const newLeft1 = beforeLeft1 + "px"
-                const newSnakePositions1 = [...snakePositions1,{top:newTop1, left:newLeft1}]
-                this.setState({snakePositions:newSnakePositions1})
-                this.checkDie()
-                this.checkEat()
-                break
+                newTop = beforeTop - 10 + "px"
+                newLeft = beforeLeft + "px"
+                break;
             case "ArrowDown":
-                const snakePositions2 = this.state.snakePositions
-                const snakeHead2 = snakePositions2[snakePositions2.length-1]
-                const beforeTop2 = parseInt(snakeHead2.top)
-                const beforeLeft2 = parseInt(snakeHead2.left)
-                snakePositions2.shift()
-                const newTop2 = beforeTop2 + 10 + "px"
-                const newLeft2 = beforeLeft2 + "px"
-                const newSnakePositions2 = [...snakePositions2,{top:newTop2, left:newLeft2}]
-                this.setState({snakePositions:newSnakePositions2})
-                this.checkDie()
-                this.checkEat()
-                break
+                newTop = beforeTop + 10 + "px"
+                newLeft = beforeLeft + "px"
+                break;
             case "ArrowLeft":
-                const snakePositions3 = this.state.snakePositions
-                const snakeHead3 = snakePositions3[snakePositions3.length-1]
-                const beforeTop3 = parseInt(snakeHead3.top)
-                const beforeLeft3 = parseInt(snakeHead3.left)
-                snakePositions3.shift()
-                const newTop3 = beforeTop3 + "px"
-                const newLeft3 = beforeLeft3 - 10 + "px"
-                const newSnakePositions3 = [...snakePositions3,{top:newTop3, left:newLeft3}]
-                this.setState({snakePositions:newSnakePositions3})
-                this.checkDie()
-                this.checkEat()
-                break
+                newTop = beforeTop + "px"
+                newLeft = beforeLeft - 10 + "px"
+                break;
             case "ArrowRight":
-                const snakePositions4 = this.state.snakePositions
-                const snakeHead4 = snakePositions4[snakePositions4.length-1]
-                const beforeTop4 = parseInt(snakeHead4.top)
-                const beforeLeft4 = parseInt(snakeHead4.left)
-                snakePositions4.shift()
-                const newTop4 = beforeTop4 + "px"
-                const newLeft4 = beforeLeft4 + 10 + "px"
-                const newSnakePositions4 = [...snakePositions4,{top:newTop4, left:newLeft4}]
-                this.setState({snakePositions:newSnakePositions4})
-                this.checkDie()
-                this.checkEat()
-                break
+                newTop = beforeTop + "px"
+                newLeft = beforeLeft + 10 + "px"
+                break;
         }
-
+        newSnakePositions = [...snakePositions,{top:newTop, left:newLeft}]
+        this.setState({snakePositions:newSnakePositions})
+        this.checkDie()
+        this.checkEat()
     }
 
+    changeSnakePosition = () => {
+        const {direction} = this.state
+        this.changePositionByDirection(direction)
+    }
 
     // 控制蛇的移动
     snakeControl = ()=>{
