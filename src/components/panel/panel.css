@@ -1,0 +1,52 @@
+.panel{
+    width: 360px;
+    height: 360px;
+    background-color: #b7d4a8;
+    border: 10px solid black;
+    border-radius: 10px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    margin-top: 20px;
+    display: flex;
+    /* 用flex使其居中定位 */
+    justify-content: space-around;
+    /* 垂直方向居中定位 */
+    align-items: center;
+}
+
+.stage{
+    width: 304px;
+    height: 304px;
+    border: 2px solid #000;
+    position: relative;
+    overflow: hidden;
+}
+
+.food{
+    width: 10px;
+    height: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #b7d4a8;
+    justify-content: space-between;
+    align-content: space-between;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+}
+
+.food div{
+    background-color: #000;
+    width: 4px;
+    height: 4px;
+    transform: rotate(45deg);
+}
+
+.snake div{
+    box-sizing: border-box;
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    background-color: #000;
+    border: 1px #b7d4a8 solid;
+}
